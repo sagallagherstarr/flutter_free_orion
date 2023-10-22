@@ -1,0 +1,20 @@
+Part
+    name = "GT_TROOP_POD_2"
+    description = "GT_TROOP_POD_2_DESC"
+    class = Troops
+    capacity = 4
+    mountableSlotTypes = [External Internal]
+    buildcost = 6 * [[FLEET_UPKEEP_MULTIPLICATOR]] * [[SHIP_PART_COST_MULTIPLIER]] * [[MARINE_RECRUITMENT_POLICY_MULTIPLIER]]
+    buildtime = 1
+    tags = [ "PEDIA_PC_TROOPS" ]
+    location = And [
+        Planet
+        OwnedBy empire = Source.Owner
+        /// @content_tag{NO_OFFENSE_TROOPS} Prevents production of ships with this part in their design at locations with this tag
+        Not HasTag name = "NO_OFFENSE_TROOPS"
+        Troops low = 4
+    ]
+//  consumption = Troops consumption = 2 condition = Source
+    icon = "icons/meter/rebels.png"
+
+#include "/scripting/common/upkeep.macros"

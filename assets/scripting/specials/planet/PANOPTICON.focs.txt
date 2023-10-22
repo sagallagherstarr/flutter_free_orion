@@ -1,0 +1,37 @@
+Special
+    name = "PANOPTICON_SPECIAL"
+    description = "PANOPTICON_SPECIAL_DESC"
+    stealth = 0
+    spawnrate = 1.0
+    spawnlimit = 1
+    location = And [
+        Planet
+        Not Planet type = [Asteroids GasGiant]
+        Not WithinStarlaneJumps jumps = 2 condition = And [
+            System
+            Contains And [
+                Planet
+                OwnedBy affiliation = AnyEmpire
+            ]
+        ]
+        Not ContainedBy Contains Design name = "SM_EXP_OUTPOST"
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = OwnedBy affiliation = AnyEmpire
+            effects = [
+                SetDetection value = Value + 75
+                SetEmpireMeter empire = Source.Owner meter = "METER_DETECTION_STRENGTH" value = Value + 10
+            ]
+        EffectsGroup
+            scope = Source
+            effects = SetTexture name = "planets/overlays/ruins.png"
+
+        [[CHANCE_OF_GUARD_2]]
+        [[SPECIAL_LIKES_OR_DISLIKES_SPECIAL_STABILITY_EFFECTS]]
+    ]
+    graphic = "icons/meter/detection.png"
+
+#include "/scripting/specials/specials.macros.txt"
+#include "./monster_guard.macros"

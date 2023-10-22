@@ -1,0 +1,25 @@
+Special
+    name = "SNOWFLAKE_NEST_SPECIAL"
+    description = "SNOWFLAKE_NEST_SPECIAL_DESC"
+    spawnrate = 0.0
+    location = And [
+        Planet
+        Planet size = Small
+        Not WithinStarlaneJumps jumps = max(2, (NamedIntegerLookup name = "MIN_MONSTER_DISTANCE")) condition = And [
+            System
+            Contains And [
+                Planet
+                OwnedBy affiliation = AnyEmpire
+            ]
+        ]
+    ]
+    effectsgroups = [
+        [[MONSTER_NEST(SNOWFLAKE,snowflake,0.08)]]
+        [[CHANCE_OF_HIDE_1]]
+        [[SPECIAL_LIKES_OR_DISLIKES_SPECIAL_STABILITY_EFFECTS]]
+    ]
+    graphic = "icons/specials_huge/snowflake-nest.png"
+
+#include "monster_nest.macros"
+#include "../monster_guard.macros"
+#include "/scripting/specials/specials.macros.txt"

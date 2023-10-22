@@ -1,0 +1,24 @@
+Special
+    name = "ANCIENT_RUINS_DEPLETED_SPECIAL"
+    description = "ANCIENT_RUINS_DEPLETED_SPECIAL_DESC"
+    spawnrate = 0.0
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            effects = SetTexture name = "planets/overlays/ruins.png"
+
+        EffectsGroup
+            scope = And [
+                Source
+                Focus type = "FOCUS_RESEARCH"
+                Happiness low = NamedRealLookup name = "ANCIENT_RUINS_MIN_STABILITY"
+            ]
+            effects = SetTargetResearch value = Value + Target.Population
+                        * NamedRealLookup name = "ANCIENT_RUINS_TARGET_RESEARCH_PERPOP"
+                        
+        [[SPECIAL_LIKES_OR_DISLIKES_SPECIAL_STABILITY_EFFECTS]]
+    ]
+    graphic = "icons/specials_huge/ancient_ruins_excavated.png"
+
+#include "/scripting/common/base_prod.macros"
+#include "/scripting/specials/specials.macros.txt"

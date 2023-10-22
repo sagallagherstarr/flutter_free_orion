@@ -1,0 +1,1 @@
+from stub_generator.stub_generator.argument_name_generator import normalize_name

@@ -1,0 +1,22 @@
+BuildingType
+    name = "BLD_CLONING_CENTER"
+    description = "BLD_CLONING_CENTER_DESC"
+    buildcost = 100 * [[BUILDING_COST_MULTIPLIER]]
+    buildtime = 5
+    location = And [
+        Planet
+        Not Contains Building name = "BLD_CLONING_CENTER"
+        OwnedBy empire = Source.Owner
+        Not Contains Or [
+            Building name = "BLD_CLONING_CENTER"
+            Building name = "BLD_BIOTERROR_PROJECTOR"
+        ]
+    ]
+    effectsgroups = [
+        [[SPECIES_LIKES_OR_DISLIKES_BUILDING_STABILITY_EFFECTS]]
+    ]
+    icon = ""
+
+#include "/scripting/common/base_prod.macros"
+#include "/scripting/buildings/buildings.macros"
+#include "/scripting/common/priorities.macros"

@@ -1,0 +1,46 @@
+Part
+    name = "SP_ASH"
+    description = "SP_ASH"
+    class = General
+    mountableSlotTypes = Internal
+    buildcost = 1
+    buildtime = 1
+    tags = [ "PEDIA_PC_GENERAL" ]
+    location = All
+    effectsgroups = [
+        EffectsGroup
+            scope = NumberOf number = 1 condition = And [
+                Planet
+                InSystem id = Source.SystemID
+            ]
+            activation = And [
+                Random probability = 0.15
+                InSystem
+            ]
+            effects = AddSpecial name = "VOLCANIC_ASH_MASTER_SPECIAL"
+
+        // does any empire have a tech that can produce stealth specials?
+        EffectsGroup
+            scope = Source
+            activation = Number low = 1 condition = And [Capital OwnerHasTech name = "SPY_STEALTH_3"]
+            effects = [
+                CreateShip designname = "SM_DIM" empire = Source.Owner name = Source.Name
+                Destroy
+            ]
+
+        EffectsGroup
+            scope = Source
+            activation = Number low = 1 condition = And [Capital OwnerHasTech name = "SPY_STEALTH_4"]
+            effects = [
+                CreateShip designname = "SM_VOID" empire = Source.Owner name = Source.Name
+                Destroy
+            ]
+
+        EffectsGroup
+            scope = HasSpecial name = "CLOUD_COVER_MASTER_SPECIAL"
+            effects = [
+                RemoveSpecial name = "CLOUD_COVER_MASTER_SPECIAL"
+                AddSpecial name = "VOLCANIC_ASH_MASTER_SPECIAL"
+            ]
+    ]
+    icon = ""

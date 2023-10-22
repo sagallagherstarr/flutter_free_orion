@@ -1,0 +1,2 @@
+Statistic name = "PP_OUTPUT" value =
+    Statistic Sum value = LocalCandidate.Industry condition = OwnedBy empire = Source.Owner

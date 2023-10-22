@@ -1,0 +1,33 @@
+Policy
+    name = "PLC_CONFEDERATION"
+    description = "PLC_CONFEDERATION_DESC"
+    short_description = "PLC_CONFEDERATION_SHORT_DESC"
+    category = "SOCIAL_CATEGORY"
+    adoptioncost = floor(2.0 * [[POPULATION_OWNED_BY_EMPIRE]]^0.5)
+    exclusions = [ "PLC_CENTRALIZATION" "PLC_METROPOLES" "PLC_TERROR_SUPPRESSION" ]
+    unlock = [
+        Item type = Policy name = "PLC_VASSALIZATION"
+        Item type = Policy name = "PLC_FEUDALISM"
+        Item type = Policy name = "PLC_BLACK_MARKET"
+    ]
+    effectsgroups = [
+        [[SPECIES_LIKES_OR_DISLIKES_POLICY_STABILITY_EFFECTS]]
+
+        // makes all planets less stable
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy empire = Source.Owner
+                Population low = 0.001
+            ]
+            effects = [
+                SetTargetHappiness value = Value 
+                    + (NamedReal name = "PLC_CONFEDERATION_TARGET_HAPPINESS_FLAT" value = -1)
+                SetMaxTroops value = Value
+                    + (NamedReal name = "PLC_CONFEDERATION_MAX_TROOPS_FLAT" value = 5)
+            ]
+    ]
+    graphic = "icons/policies/social_confederation.png"
+
+#include "/scripting/policies/policies.macros"
+#include "/scripting/common/misc.macros"

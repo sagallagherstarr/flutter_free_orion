@@ -1,0 +1,26 @@
+Part
+    name = "SR_WEAPON_0_1"
+    description = "SR_WEAPON_0_1_DESC"
+    class = ShortRange
+    damage = 1
+    shots = 3
+    NoDefaultCapacityEffect
+    damageStructurePerBattleMax = 0
+    combatTargets = And [
+        Fighter
+        [[COMBAT_TARGETS_VISIBLE_ENEMY]]
+    ]
+    mountableSlotTypes = External
+    buildcost = 20 * [[FLEET_UPKEEP_MULTIPLICATOR]] * [[SHIP_PART_COST_MULTIPLIER]]
+    buildtime = 1
+    tags = [ "PEDIA_PC_DIRECT_WEAPON" ]
+    location = And [
+        Planet
+        OwnedBy empire = Source.Owner
+    ]
+    effectsgroups = [[SET_BOTH_MAX_CAPACITIES_FROM_PART_CAPACITIES]]
+    icon = "icons/ship_parts/flak.png"
+
+#include "shortrange.macros"
+#include "/scripting/common/upkeep.macros"
+#include "/scripting/ship_parts/targeting.macros"

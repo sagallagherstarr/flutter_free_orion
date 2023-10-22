@@ -1,0 +1,65 @@
+Policy
+    name = "PLC_BUREAUCRACY"
+    description = "PLC_BUREAUCRACY_DESC"
+    short_description = "PLC_BUREAUCRACY_SHORT_DESC"
+    category = "ECONOMIC_CATEGORY"
+    adoptioncost = floor(2.0 * [[POPULATION_OWNED_BY_EMPIRE]]^0.5)
+    unlock = [
+        Item type = Building name = "BLD_REGIONAL_ADMIN"
+        Item type = Policy name = "PLC_TECHNOCRACY"
+    ]
+    effectsgroups = [
+        [[SPECIES_LIKES_OR_DISLIKES_POLICY_STABILITY_EFFECTS]]
+
+        // costs IP to change focus: don't disrupt the system!
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy empire = Source.Owner
+                Species
+                (LocalCandidate.TurnsSinceFocusChange == 0)
+                (LocalCandidate.TurnsSinceColonization > 1) // all changes on first turn after colonization without penalty
+                Not (LocalCandidate.TurnsSinceLastConquered == 1) // same for newly conquered, note that 0 means never conquered
+            ]
+            priority = [[FOCUS_CHANGE_PENALTY_PRIORITY]]
+            effects = SetInfluence value = Value - (NamedReal name = "BUREAUCRACY_FOCUS_CHANGE_PENALTY" value = 3.0)
+
+        // Increases stability on all planets, but also cost some IP. Cost is reduced when there are
+        // more administrative buildings, and also when Centralization is adopted as well.
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy empire = Source.Owner
+                Species
+            ]
+            // IP costs should not be affected by any multipliers
+            priority = [[TARGET_LATE_AFTER_2ND_SCALING_PRIORITY]]
+            effects = [
+                SetTargetHappiness value = Value + (NamedReal name = "PLC_BUREAUCRACY_STABILITY_FLAT" value = 5.0)
+                // Base cost 1/4 of the adoption cost...
+                SetTargetInfluence value = Value - 0.5 * [[POPULATION_OWNED_BY_EMPIRE]]^0.5
+                    // ...reduced to 1/10 with Centralization
+                    / 2.5 ^ (Statistic If condition = And [Source EmpireHasAdoptedPolicy empire = Target.Owner name = "PLC_CENTRALIZATION"])
+                    // divided by number of sqrt(administrative buildings + 1)
+                    / ((Statistic Count
+                        condition = And [
+                            Or [
+                                Building name = "BLD_REGIONAL_ADMIN"
+                                Building name = "BLD_IMPERIAL_PALACE"
+                            ]
+                            OwnedBy empire = Source.Owner
+                        ]) + 1)^0.5
+                    // distributed equally to all populated planets
+                    / (Statistic Count
+                        condition = And [
+                            Planet
+                            OwnedBy empire = Source.Owner
+                            Species
+                        ])
+            ]
+    ]
+    graphic = "icons/policies/economic_bureaucracy.png"
+
+#include "/scripting/common/base_prod.macros"
+#include "/scripting/policies/policies.macros"
+#include "/scripting/common/priorities.macros"

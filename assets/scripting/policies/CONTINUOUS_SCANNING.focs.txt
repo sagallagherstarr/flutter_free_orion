@@ -1,0 +1,34 @@
+Policy
+    name = "PLC_CONTINUOUS_SCANNING"
+    description = "PLC_CONTINUOUS_SCANNING_DESC"
+    short_description = "PLC_CONTINUOUS_SCANNING_SHORT_DESC"
+    category = "MILITARY_CATEGORY"
+    adoptioncost = 5 + [[SHIPS_OWNED_BY_EMPIRE]]
+    effectsgroups = [
+        [[SPECIES_LIKES_OR_DISLIKES_POLICY_STABILITY_EFFECTS]]
+
+        EffectsGroup
+            scope = And [
+                Ship
+                OwnedBy empire = Source.Owner
+            ]
+            effects = [
+                SetDetection value = Value + (NamedReal name = "CONTINUOUS_SCANNING_RANGE_BOOST" value = 10.0)
+                SetStealth value = Value - (NamedReal name = "CONTINUOUS_SCANNING_STEALTH_PENALTY" value = 10.0)
+            ]
+
+        EffectsGroup
+            scope = And [
+                Capital
+                OwnedBy empire = Source.Owner
+            ]
+            effects = SetEmpireMeter
+                empire = Source.Owner
+                meter = "METER_DETECTION_STRENGTH"
+                value = Value + min((NamedReal name = "CONTINUOUS_SCANNING_MAX_DETECTION_BOOST" value = 10.0),
+                                    TurnsSincePolicyAdopted empire = Source.Owner name = ThisPolicy)
+    ]
+    graphic = "icons/policies/military_continuous_scanning.png"
+
+#include "/scripting/policies/policies.macros"
+#include "/scripting/common/priorities.macros"

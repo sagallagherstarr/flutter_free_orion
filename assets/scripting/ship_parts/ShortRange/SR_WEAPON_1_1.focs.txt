@@ -1,0 +1,28 @@
+Part
+    name = "SR_WEAPON_1_1"
+    description = "SR_WEAPON_1_1_DESC"
+    class = ShortRange
+    damage = 3
+    destroyFightersPerBattleMax = 0
+    combatTargets = And [
+        Or [
+           [[COMBAT_TARGETS_NOT_DESTROYED_SHIP]]
+           [[COMBAT_TARGETS_PLANET_WITH_DEFENSE]]
+        ]
+        [[COMBAT_TARGETS_VISIBLE_ENEMY]]
+    ]
+    mountableSlotTypes = External
+    buildcost = 20 * [[FLEET_UPKEEP_MULTIPLICATOR]] * [[SHIP_PART_COST_MULTIPLIER]]
+    buildtime = 1
+    tags = [ "PEDIA_PC_DIRECT_WEAPON" ]
+    location = And [
+        Planet
+        OwnedBy empire = Source.Owner
+    ]
+        
+    icon = "icons/ship_parts/mass-driver.png"
+
+#include "shortrange.macros"
+
+#include "/scripting/common/upkeep.macros"
+#include "/scripting/ship_parts/targeting.macros"

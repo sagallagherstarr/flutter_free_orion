@@ -1,0 +1,26 @@
+Special
+    name = "KRAKEN_NEST_SPECIAL"
+    description = "KRAKEN_NEST_SPECIAL_DESC"
+    spawnrate = 0.0
+    location = And [
+        (GalaxyMonsterFrequency >= 1)
+        Planet
+        Planet type = GasGiant
+        Not WithinStarlaneJumps jumps = max(3, (NamedIntegerLookup name = "MIN_MONSTER_DISTANCE")) condition = And [
+            System
+            Contains And [
+                Planet
+                OwnedBy affiliation = AnyEmpire
+            ]
+        ]
+    ]
+    effectsgroups = [
+        [[MONSTER_NEST(KRAKEN,kraken,0.05)]]
+        [[CHANCE_OF_HIDE_1]]
+        [[SPECIAL_LIKES_OR_DISLIKES_SPECIAL_STABILITY_EFFECTS]]
+    ]
+    graphic = "icons/specials_huge/kraken-nest.png"
+
+#include "monster_nest.macros"
+#include "../monster_guard.macros"
+#include "/scripting/specials/specials.macros.txt"

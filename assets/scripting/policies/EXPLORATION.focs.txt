@@ -1,0 +1,71 @@
+Policy
+    name = "PLC_EXPLORATION"
+    description = "PLC_EXPLORATION_DESC"
+    short_description = "PLC_EXPLORATION_SHORT_DESC"
+    category = "MILITARY_CATEGORY"
+    adoptioncost = 10
+    exclusions = [ "PLC_COLONIZATION" "PLC_ISOLATION" ]
+    unlock = Item type = Policy name = "PLC_NECESSITY"
+    effectsgroups = [
+        [[SPECIES_LIKES_OR_DISLIKES_POLICY_STABILITY_EFFECTS]]
+
+        EffectsGroup
+            scope = And [
+                Ship
+                OwnedBy empire = Source.Owner
+                DesignHasPartClass low = 0 high = 0 class = ShortRange
+                DesignHasPartClass low = 0 high = 0 class = FighterBay
+                DesignHasPartClass low = 0 high = 0 class = FighterHangar
+                DesignHasPartClass low = 0 high = 0 class = Shield
+                DesignHasPartClass low = 0 high = 0 class = Armour
+                DesignHasPartClass low = 0 high = 0 class = Troops
+                DesignHasPartClass low = 0 high = 0 class = Colony
+                DesignHasPartClass low = 0 high = 0 class = General
+                DesignHasPartClass low = 0 high = 0 class = Bombard
+                DesignHasPartClass low = 0 high = 0 class = Research
+                DesignHasPartClass low = 0 high = 0 class = Industry
+                DesignHasPartClass low = 0 high = 0 class = Influence
+                DesignHasPartClass low = 0 high = 0 class = ProductionLocation
+            ]
+            effects = SetSpeed value = Value + (NamedReal name = "PLC_EXPLORATION_SPEED_BONUS" value = 20)
+
+        // spread research bonus even over all ships that explore system on the same turn
+        EffectsGroup
+            scope = And [
+                Ship
+                OwnedBy empire = Source.Owner
+                InSystem
+                ContainedBy And [
+                    System
+                    (CurrentTurn == TurnSystemExplored empire = Source.Owner id = LocalCandidate.ID)
+                ]
+            ]
+            effects = SetTargetResearch value = Value +
+                (NamedReal name = "EXPLORATION_RESEARCH_BONUS_TOTAL" value = 1.0) / max(1.0,
+                    Statistic Count condition = And [
+                        InSystem id = Target.SystemID
+                        Ship
+                        OwnedBy empire = Source.Owner
+                    ])
+        
+        EffectsGroup
+            scope = And [
+                System
+                (CurrentTurn == TurnSystemExplored empire = Source.Owner id = LocalCandidate.ID)
+                Contains And [
+                    Ship
+                    OwnedBy empire = Source.Owner
+                ]
+            ]
+            effects =
+                GenerateSitRepMessage
+                    message = "SITREP_FIELD_RESEARCH"
+                    label = "SITREP_FIELD_RESEARCH_LABEL"
+                    icon = "icons/tech/environmental_encapsulation.png"
+                    parameters = tag = "system" data = Target.SystemID
+                    empire = Source.Owner
+    ]
+    graphic = "icons/policies/military_exploration.png"
+
+#include "/scripting/policies/policies.macros"
+#include "/scripting/common/priorities.macros"

@@ -1,0 +1,37 @@
+Policy
+    name = "PLC_SYSTEM_INFRA"
+    description = "PLC_SYSTEM_INFRA_DESC"
+    short_description = "PLC_SYSTEM_INFRA_SHORT_DESC"
+    category = "ECONOMIC_CATEGORY"
+    adoptioncost = 80
+    prerequisites = [ "PLC_PLANETARY_INFRA" ]
+    unlock = [
+        Item type = Policy name = "PLC_CAPITAL_MARKETS"
+        Item type = Policy name = "PLC_INTERSTELLAR_INFRA"
+    ]
+    effectsgroups = [
+        [[SPECIES_LIKES_OR_DISLIKES_POLICY_STABILITY_EFFECTS]]
+
+        EffectsGroup
+            scope = Source
+            priority = [[TARGET_AFTER_SCALING_PRIORITY]]
+            effects = SetEmpireMeter empire = Source.Owner meter = "ECONOMIC_CATEGORY_NUM_POLICY_SLOTS" value = Value + 1
+        
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy empire = Source.Owner
+                Species
+                Number low = 2 condition = And [
+                    InSystem id = RootCandidate.SystemID
+                    Planet
+                    OwnedBy empire = Source.Owner
+                ]
+            ]
+            effects = SetTargetConstruction value = Value + 5
+    ]
+    graphic = "icons/policies/economic_system_infrastructure.png"
+
+#include "/scripting/common/base_prod.macros"
+#include "/scripting/common/priorities.macros"
+#include "/scripting/policies/policies.macros"

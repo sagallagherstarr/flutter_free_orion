@@ -1,0 +1,57 @@
+Special
+    name = "WORLDTREE_SPECIAL"
+    description = "WORLDTREE_SPECIAL_DESC"
+    stealth = 0
+    spawnrate = 1.0
+    spawnlimit = 1
+    location = And [
+        Planet
+        Not Planet type = [Asteroids GasGiant Inferno]
+        Not Planet size = [Tiny Huge]
+        Not WithinStarlaneJumps jumps = 2 condition = And [
+            System
+            Contains And [
+                Planet
+                OwnedBy affiliation = AnyEmpire
+            ]
+        ]
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Not Species name = "SP_KHAKTURIAN"
+            accountinglabel = "WORLDTREE_LABEL"
+            priority = [[TARGET_AFTER_SCALING_PRIORITY]]
+            effects = [
+                SetDetection value = Value + 10
+                SetMaxSupply value = Value + 1
+                SetTargetHappiness value = Value + 5
+            ]
+            
+        EffectsGroup
+            scope = Source
+            activation = And [
+                TargetPopulation low = 1
+                Not Species name = "SP_KHAKTURIAN"
+            ]
+            accountinglabel = "WORLDTREE_LABEL"
+            priority = [[TARGET_POPULATION_AFTER_SCALING_PRIORITY]]
+            effects = SetTargetPopulation value = Value + 1
+            
+        EffectsGroup
+            scope = And [
+                Planet
+                Not Source
+                OwnedBy affiliation = TheEmpire empire = Source.Owner
+                Population low = 0.0001
+                Not Species name = "SP_KHAKTURIAN"
+            ]
+            accountinglabel = "WORLDTREE_LABEL"
+            effects = SetTargetHappiness value = Value + 1
+
+        [[SPECIAL_LIKES_OR_DISLIKES_SPECIAL_STABILITY_EFFECTS]]
+    ]
+    graphic = "icons/specials_huge/worldtree.png"
+
+#include "/scripting/common/priorities.macros"
+#include "/scripting/specials/specials.macros.txt"

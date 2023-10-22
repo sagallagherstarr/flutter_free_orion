@@ -1,0 +1,14 @@
+ShipDesign
+    name = "SM_ACIREMA_GUARD"
+    uuid = "08a58b08-0929-496d-84fc-fba91424ca16"
+    description = "SM_ACIREMA_GUARD_DESC"
+    hull = "SH_GUARD_ACIREMA_BODY"
+    parts = [
+        "SR_WEAPON_3_1"
+        "SH_DEFENSE_GRID"
+        "SR_ARC_DISRUPTOR"
+        "AR_DIAMOND_PLATE"
+        "DT_DETECTOR_3"
+    ]
+    icon = "icons/ship_hulls/energy_frigate_hull_small.png"
+    model = "seed"

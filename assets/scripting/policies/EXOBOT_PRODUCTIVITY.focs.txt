@@ -1,0 +1,46 @@
+Policy
+    name = "PLC_EXOBOT_PRODUCTIVITY"
+    description = "PLC_EXOBOT_PRODUCTIVITY_DESC"
+    short_description = "PLC_EXOBOT_PRODUCTIVITY_SHORT_DESC"
+    category = "ECONOMIC_CATEGORY"
+    adoptioncost = 5 + Statistic Count condition = And [
+        Planet
+        OwnedBy empire = Source.Owner
+        Species name = "SP_EXOBOT"
+    ]
+    effectsgroups = [
+        [[SPECIES_LIKES_OR_DISLIKES_POLICY_STABILITY_EFFECTS]]
+    
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy empire = Source.Owner
+                Species name = "SP_EXOBOT"
+                TargetIndustry low = 0
+                Focus type = "FOCUS_INDUSTRY"
+            ]
+            // Very bad multiplier is applied before, so it must be reverted before applying bad multiplier.
+            effects = SetTargetIndustry value = Value
+                        * (NamedReal name = "PLC_EXOBOT_PRODUCTIVITY_TARGET_INDUSTRY_SCALING"
+                                     value = ([[BAD_MULTIPLIER]] / [[VERY_BAD_MULTIPLIER]]))
+
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy empire = Source.Owner
+                Species
+                Not Species name = "SP_EXOBOT"
+                Focus type = "FOCUS_INDUSTRY"
+            ]
+            // Other planets don't want to work when exobots could be doing it
+            effects = [
+                SetTargetHappiness value = Value - (NamedReal name = "PLC_EXOBOT_OTHER_PLANET_INDUSTRY_PENALTY" value = 1.0)
+                SetTargetIndustry value = Value - (NamedReal name = "PLC_EXOBOT_OTHER_PLANET_INDUSTRY_PENALTY" value = 1.0)
+            ]
+
+    ]
+    graphic = "icons/policies/economic_exobot_productivity.png"
+
+#include "/scripting/species/common/*.macros"
+#include "/scripting/policies/policies.macros"
+#include "/scripting/common/priorities.macros"
