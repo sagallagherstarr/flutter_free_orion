@@ -1,4 +1,7 @@
+import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
+
+import 'package:logging_flutter/logging_flutter.dart';
 
 class AppMainWindow extends StatefulWidget {
   const AppMainWindow({super.key, required this.title});
@@ -37,6 +40,7 @@ class _AppMainWindowState extends State<AppMainWindow> {
             icon: const Icon(Icons.add_alert),
             tooltip: 'Show Snackbar',
             onPressed: () {
+              Flogger.i("Alert Icon pressed");
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('This is a ALERT')));
             },
@@ -45,10 +49,18 @@ class _AppMainWindowState extends State<AppMainWindow> {
             icon: const Icon(Icons.navigate_next),
             tooltip: 'Go to the next page',
             onPressed: () {
+              Flogger.i("next icon pressed");
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('This is a NEXT PAGE')));
             }
-          )
+          ),
+          if (kDebugMode) IconButton(
+            icon: const Icon(Icons.adb),
+            tooltip: "open application log",
+            onPressed: () {
+              LogConsole.open(context);
+            }
+          ),
 
         ],
       ),

@@ -9,7 +9,8 @@ class FlutterFreeOrionApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Free Orion',
       theme: ThemeData(
         // This is the theme of your application.
         //

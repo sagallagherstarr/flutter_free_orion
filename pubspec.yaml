@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 0.0.5
 
 environment:
   sdk: '>=3.1.3 <4.0.0'
@@ -35,6 +35,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  asset_fill: ^1.1.0
+  logging: ^1.2.0
+  logging_flutter: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -52,7 +55,189 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  assets:
+    - assets/data/
+    - assets/data/art/
+    - assets/data/art/cursors/
+    - assets/data/art/encyclopedia/
+    - assets/data/art/encyclopedia/planet_environments/
+    - assets/data/art/fields/
+    - assets/data/art/galaxy_decoration/
+    - assets/data/art/galaxy_decoration/blue_set/
+    - assets/data/art/galaxy_decoration/grey_set/
+    - assets/data/art/galaxy_decoration/haze_set/
+    - assets/data/art/galaxy_decoration/obsidian_set/
+    - assets/data/art/galaxy_decoration/red_set/
+    - assets/data/art/galaxy_decoration/rust_set/
+    - assets/data/art/hulls_design/
+    - assets/data/art/icons/
+    - assets/data/art/icons/building/
+    - assets/data/art/icons/buttons/
+    - assets/data/art/icons/flags/
+    - assets/data/art/icons/flags/emblem/
+    - assets/data/art/icons/flags/field/
+    - assets/data/art/icons/fleet/
+    - assets/data/art/icons/focus/
+    - assets/data/art/icons/meter/
+    - assets/data/art/icons/monsters/
+    - assets/data/art/icons/planet/
+    - assets/data/art/icons/policies/
+    - assets/data/art/icons/ship_hulls/
+    - assets/data/art/icons/ship_parts/
+    - assets/data/art/icons/sitrep/
+    - assets/data/art/icons/specials_huge/
+    - assets/data/art/icons/specials_large/
+    - assets/data/art/icons/specials_tiny/
+    - assets/data/art/icons/species/
+    - assets/data/art/icons/tech/
+    - assets/data/art/icons/tech/categories/
+    - assets/data/art/icons/tech/controls/
+    - assets/data/art/icons/tech/unused/
+    - assets/data/art/misc/
+    - assets/data/art/misc/system_selection/
+    - assets/data/art/misc/system_selection_tiny/
+    - assets/data/art/nebulae/
+    - assets/data/art/planets/
+    - assets/data/art/planets/asteroids/
+    - assets/data/art/planets/atmospheres/
+    - assets/data/art/planets/citylights/
+    - assets/data/art/planets/clouds/
+    - assets/data/art/planets/damage/
+    - assets/data/art/planets/overlays/
+    - assets/data/art/planets/rings/
+    - assets/data/art/species/
+    - assets/data/art/species/preview/
+    - assets/data/art/stars/
+    - assets/data/art/stars/old_stars/
+    - assets/data/art/stars_sidepanel/
+    - assets/data/fonts/
+    - assets/data/sound/
+    - assets/data/sound/combat/
+    - assets/python/
+    - assets/python/AI/
+    - assets/python/AI/CombatRatingsAI/
+    - assets/python/AI/character/
+    - assets/python/AI/colonization/
+    - assets/python/AI/empire/
+    - assets/python/AI/expansion_plans/
+    - assets/python/AI/freeorion_tools/
+    - assets/python/AI/freeorion_tools/chat_handler/
+    - assets/python/AI/freeorion_tools/statistics/
+    - assets/python/AI/production/
+    - assets/python/AI/savegame_codec/
+    - assets/python/AI/ship_design/
+    - assets/python/AI/turn_state/
+    - assets/python/AI/universe/
+    - assets/python/auth/
+    - assets/python/charting/
+    - assets/python/charting/log_parser/
+    - assets/python/charting/log_parser/tests/
+    - assets/python/charting/tabs/
+    - assets/python/chat/
+    - assets/python/common/
+    - assets/python/common/print_utils/
+    - assets/python/common/statistic_interface/
+    - assets/python/handlers/
+    - assets/python/stub_generator/
+    - assets/python/stub_generator/interface_inspector/
+    - assets/python/stub_generator/stub_generator/
+    - assets/python/stub_generator/stub_generator/collection_classes/
+    - assets/python/stub_generator/stub_generator/rtype/
+    - assets/python/tests/
+    - assets/python/tests/AI/
+    - assets/python/tests/AI/character_test/
+    - assets/python/tests/AI/save_game_codec/
+    - assets/python/tests/common/
+    - assets/python/turn_events/
+    - assets/python/universe_generation/
+    - assets/scripting/
+    - assets/scripting/_readme_images/
+    - assets/scripting/buildings/
+    - assets/scripting/buildings/colonies/
+    - assets/scripting/buildings/shipyards/
+    - assets/scripting/common/
+    - assets/scripting/empire_statistics/
+    - assets/scripting/encyclopedia/
+    - assets/scripting/encyclopedia/game_concepts/
+    - assets/scripting/encyclopedia/game_concepts/diplomacy/
+    - assets/scripting/encyclopedia/game_concepts/metabolism/
+    - assets/scripting/encyclopedia/game_concepts/planet_management/
+    - assets/scripting/encyclopedia/game_concepts/planetary_focus/
+    - assets/scripting/encyclopedia/game_concepts/ship_management/
+    - assets/scripting/encyclopedia/game_concepts/species_traits/
+    - assets/scripting/encyclopedia/guides/
+    - assets/scripting/encyclopedia/guides/interface/
+    - assets/scripting/encyclopedia/ship_hull/
+    - assets/scripting/encyclopedia/ship_hull/monster/
+    - assets/scripting/encyclopedia/ship_parts/
+    - assets/scripting/encyclopedia/species/
+    - assets/scripting/encyclopedia/techs/
+    - assets/scripting/encyclopedia/techs/ship_hulls/
+    - assets/scripting/encyclopedia/techs/ship_parts/
+    - assets/scripting/encyclopedia/techs/ship_weapons/
+    - assets/scripting/fields/
+    - assets/scripting/focs/
+    - assets/scripting/monster_designs/
+    - assets/scripting/policies/
+    - assets/scripting/ship_designs/
+    - assets/scripting/ship_designs/required/
+    - assets/scripting/ship_hulls/
+    - assets/scripting/ship_hulls/asteroid/
+    - assets/scripting/ship_hulls/energy/
+    - assets/scripting/ship_hulls/monster/
+    - assets/scripting/ship_hulls/organic/
+    - assets/scripting/ship_hulls/robotic/
+    - assets/scripting/ship_hulls/spatial_flux/
+    - assets/scripting/ship_parts/
+    - assets/scripting/ship_parts/Armour/
+    - assets/scripting/ship_parts/Bombard/
+    - assets/scripting/ship_parts/Colony/
+    - assets/scripting/ship_parts/Detection/
+    - assets/scripting/ship_parts/FighterBay/
+    - assets/scripting/ship_parts/FighterHangar/
+    - assets/scripting/ship_parts/Fuel/
+    - assets/scripting/ship_parts/General/
+    - assets/scripting/ship_parts/Shield/
+    - assets/scripting/ship_parts/ShortRange/
+    - assets/scripting/ship_parts/Speed/
+    - assets/scripting/ship_parts/Stealth/
+    - assets/scripting/ship_parts/Troops/
+    - assets/scripting/specials/
+    - assets/scripting/specials/planet/
+    - assets/scripting/specials/planet/growth/
+    - assets/scripting/specials/planet/luxury/
+    - assets/scripting/specials/planet/monster_nest/
+    - assets/scripting/specials/planet/monster_stealth/
+    - assets/scripting/specials/system/
+    - assets/scripting/species/
+    - assets/scripting/species/common/
+    - assets/scripting/starting_unlocks/
+    - assets/scripting/techs/
+    - assets/scripting/techs/construction/
+    - assets/scripting/techs/defense/
+    - assets/scripting/techs/growth/
+    - assets/scripting/techs/learning/
+    - assets/scripting/techs/production/
+    - assets/scripting/techs/ship_hulls/
+    - assets/scripting/techs/ship_hulls/asteroid/
+    - assets/scripting/techs/ship_hulls/energy/
+    - assets/scripting/techs/ship_hulls/organic/
+    - assets/scripting/techs/ship_hulls/robotic/
+    - assets/scripting/techs/ship_hulls/spatial_flux/
+    - assets/scripting/techs/ship_parts/
+    - assets/scripting/techs/ship_parts/armor/
+    - assets/scripting/techs/ship_parts/damage_control/
+    - assets/scripting/techs/ship_parts/fuel/
+    - assets/scripting/techs/ship_parts/shield/
+    - assets/scripting/techs/ship_parts/speed/
+    - assets/scripting/techs/ship_weapons/
+    - assets/scripting/techs/ship_weapons/bombard/
+    - assets/scripting/techs/ship_weapons/fighters/
+    - assets/scripting/techs/ship_weapons/short_range/
+    - assets/scripting/techs/specials/
+    - assets/scripting/techs/spy/
+    - assets/shaders/
+    - assets/stringtables/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
