@@ -3,6 +3,8 @@ import "package:flutter/material.dart";
 
 import 'package:logging_flutter/logging_flutter.dart';
 
+import "menu_row.dart";
+
 class AppMainWindow extends StatefulWidget {
   const AppMainWindow({super.key, required this.title});
 
@@ -24,6 +26,11 @@ class AppMainWindow extends StatefulWidget {
 class _AppMainWindowState extends State<AppMainWindow> {
   @override
   Widget build(BuildContext context) {
+    // String buttonIcons = "assets/data/art/icons/buttons";
+
+    // String appMenuIcon = "$buttonIcons/menu.png";
+    // String productionMenuIcon = "$buttonIcons/production_clicked.png";
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -36,24 +43,29 @@ class _AppMainWindowState extends State<AppMainWindow> {
         title: Text(widget.title),
         // TODO: replace with the full list of icon buttons from FreeOrion
         actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.add_alert),
-            tooltip: 'Show Snackbar',
-            onPressed: () {
-              Flogger.i("Alert Icon pressed");
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('This is a ALERT')));
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.navigate_next),
-            tooltip: 'Go to the next page',
-            onPressed: () {
-              Flogger.i("next icon pressed");
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('This is a NEXT PAGE')));
-            }
-          ),
+          // IconButton(
+          //   icon: ImageIcon(
+          //       AssetImage(productionMenuIcon,
+          //           bundle: DefaultAssetBundle.of(context))),
+          //   tooltip: 'Show Snackbar',
+          //   onPressed: () {
+          //     Flogger.i("Alert Icon pressed");
+          //     ScaffoldMessenger.of(context).showSnackBar(
+          //       const SnackBar(content: Text('This is a ALERT')));
+          //   },
+          // ),
+          // IconButton(
+          //   icon: ImageIcon(
+          //     AssetImage(appMenuIcon,
+          //       bundle: DefaultAssetBundle.of(context))),
+          //   // icon: const Icon(Icons.navigate_next),
+          //   tooltip: 'Go to the next page',
+          //   onPressed: () {
+          //     Flogger.i("next icon pressed");
+          //     ScaffoldMessenger.of(context).showSnackBar(
+          //       const SnackBar(content: Text('This is a NEXT PAGE')));
+          //   }
+          // ),
           if (kDebugMode) IconButton(
             icon: const Icon(Icons.adb),
             tooltip: "open application log",
@@ -64,11 +76,7 @@ class _AppMainWindowState extends State<AppMainWindow> {
 
         ],
       ),
-      body: const Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Placeholder(),
-      ),
+      body: TopCommandButtonRow()
     );
   }
 }
